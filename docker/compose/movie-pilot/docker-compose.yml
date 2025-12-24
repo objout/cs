@@ -1,0 +1,122 @@
+services:
+
+  moviepilot:
+    image: jxxghp/moviepilot-v2:2.8.8
+
+    container_name: moviepilot-v2
+
+    hostname: moviepilot-v2
+    stdin_open: true
+    tty: true
+
+    # TODO
+    environment:
+      - 'NGINX_PORT=3000'
+      - 'PORT=3001'
+      - 'PUID=1000'
+      - 'PGID=1000'
+      - 'UMASK=000'
+      # 时区
+      - 'TZ=Asia/Shanghai'
+      # moviepilot 管理员用户名
+      - 'SUPERUSER=admin'
+      # moviepilot 管理员用户初始密码
+      - 'SUPERUSER_PASSWORD=你的初始登录密码'
+      # 数据库类型
+      - 'DB_TYPE=postgresql'
+      # 数据库主机地址
+      - 'DB_POSTGRESQL_HOST=postgresql'
+      # 数据库端口
+      - 'DB_POSTGRESQL_PORT=5432'
+      # 数据库名称
+      - 'DB_POSTGRESQL_DATABASE=moviepilot'
+      # 数据库用户名
+      - 'DB_POSTGRESQL_USERNAME=moviepilot'
+      # 数据库用户密码
+      - 'DB_POSTGRESQL_PASSWORD=52ebc739-3185-47c3-a5f8-9c9170f72e92'
+      # 缓存类型
+      - 'CACHE_BACKEND_TYPE=redis'
+      # 缓存地址
+      - 'CACHE_BACKEND_URL=redis://:c853651d-d0f3-41ef-a26b-46251c51aa24@redis:6379'
+
+    # TODO
+    ports:
+     - '3000:3000'
+     - '3001:3001'
+
+    # TODO
+    volumes:
+      - '/media:/media' #媒体
+      - '/moviepilot-v2/config:/config' #持久化配置
+      - '/moviepilot-v2/core:/moviepilot/.cache/ms-playwright' #内核浏览器
+      - '/var/run/docker.sock:/var/run/docker.sock:ro' #重启MP权限
+      - '/tr/config/torrents:/torrents'  #TR种子位置
+      - '/qbittorrent/data/data/BT_backup:/BT_backup' #QB种子位置
+
+    restart: always
+
+    depends_on:
+      postgresql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  redis:
+    image: redis:8.4.0
+
+    command: redis-server --save 600 1 --requirepass c853651d-d0f3-41ef-a26b-46251c51aa24
+
+    # TODO
+    volumes:
+        - /volume1/docker/redis/data:/data
+
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgresql:
+    image: postgres:18
+
+    environment:
+      # 数据库名称
+      POSTGRES_DB: moviepilot
+      # 数据库用户名
+      POSTGRES_USER: moviepilot
+      # 数据库用户密码
+      POSTGRES_PASSWORD: 52ebc739-3185-47c3-a5f8-9c9170f72e92
+
+    # TODO
+    volumes:
+      - /volume1/docker/postgresql:/var/lib/postgresql
+
+    restart: always
+
+    # 健康检查
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U moviepilot -d moviepilot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 迁移数据库
+  pgloader:
+    image: dimitri/pgloader:v3.6.7
+
+    # TODO
+    command: >
+      pgloader
+      sqlite:///mp_config/user.db
+      postgresql://moviepilot:52ebc739-3185-47c3-a5f8-9c9170f72e92@postgresql:5432/moviepilot
+
+    # TODO
+    volumes:
+      - /data/moviepilot-v2/mp_config/:/mp_config
+
+    depends_on:
+      postgresql:
+        condition: service_healthy
+
+# vim: set ft=yaml fdm=indent:
