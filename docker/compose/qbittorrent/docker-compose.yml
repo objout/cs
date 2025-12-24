@@ -1,0 +1,40 @@
+---
+services:
+  qbittorrent:
+    #image: lscr.io/linuxserver/qbittorrent:latest
+    image: linuxserver/qbittorrent:5.1.2-r2-ls415
+
+    container_name: qbittorrent
+
+    # TODO
+    environment:
+      # user ID
+      - PUID=1000
+      # group ID
+      - PGID=1000
+      # time zone
+      - TZ=Etc/UTC
+      # for changing the port of the web UI
+      - WEBUI_PORT=8080
+      # for changing the port of tcp/udp connection
+      - TORRENTING_PORT=6881
+
+    # TODO
+    volumes:
+      # contains all relevant configuration files
+      #- /path/to/qbittorrent/appdata:/config
+      - ./config:/config
+      # location of downloads on disk (optional)
+      #- /path/to/downloads:/downloads
+      - ./downloads:/downloads
+
+    # TODO
+    ports:
+      # web ui
+      - 8080:8080
+      # tcp connection ort
+      - 6881:6881
+      # udp connection port
+      - 6881:6881/udp
+
+    restart: unless-stopped
