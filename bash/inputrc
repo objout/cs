@@ -1,0 +1,17 @@
+set editing-mode vi
+
+set show-mode-in-prompt On
+set vi-ins-mode-string [I]
+set vi-cmd-mode-string [N]
+
+set keymap vi-insert
+"jk": vi-movement-mode
+#"\ee": emacs-editing-mode
+#"kj": vi-movement-mode
+
+set keymap vi-command
+"gU": upcase-word
+"gu": downcase-word
+#"//": complete-filename
+#"/$": complete-variable
+#"\ee": emacs-editing-mode
