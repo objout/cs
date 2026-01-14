@@ -1,4 +1,5 @@
+alias c="curl"
 alias d="docker"
-alias v="vim"
 alias s="systemctl"
 alias svc="service"
+alias v="vim"
