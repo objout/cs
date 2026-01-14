@@ -12,4 +12,8 @@ BRANCH="main"
 URL="https://${SITE}/${USER_NAME}/${REPO_NAME}/raw/${BRANCH}"
 FILE_PATH="$1"
 
-curl --url $URL/$FILE_PATH -LO
+if [ -n "$2" ] ; then
+  curl --url $URL/$FILE_PATH -L -o $2
+else
+  curl --url $URL/$FILE_PATH -LO
+fi
