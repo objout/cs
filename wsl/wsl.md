@@ -59,3 +59,23 @@ exit
 `compact vdisk` 会扫描虚拟磁盘，仅保留实际存储数据的区块，但前提是
 未使用的空间必须被显式填充为零 (e.g. `dd if=/dev/zero`)。若删除文件后数据块
 没有置零，则可能被视为已使用空间。
+
+## 更新 WSL 的版本
+
+从 GitHub 下载:
+
+```
+wsl --update --web-download
+```
+
+## 关闭 WSL
+
+```
+wsl --shutdown
+```
+
+## 设置默认版本
+
+```
+wsl --set-default-version 2
+```
