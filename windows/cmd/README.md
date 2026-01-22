@@ -40,6 +40,12 @@ explorer %HomePath%
 
 # 文件管理器中打开用户应用数据目录
 explorer %AppData%
+
+# 任务管理器
+taskmgr
+
+# 任务计划程序
+taskschd.msc
 ```
 
 ## 常用环境变量
