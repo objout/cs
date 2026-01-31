@@ -1,0 +1,116 @@
+# Path: $HOME/.config/zathura/zathurarc
+
+# Version of zathura -----
+# zathura 0.5.8
+# girara 0.4.4 (runtime: 0.4.4)
+# (plugin) pdf-poppler (0.3.3)
+# ---
+
+# General Settings -----
+set guioptions ''
+
+set window-title-basename true
+
+set statusbar-basename true
+#set statusbar-home-tilde  true
+
+set database 'sqlite'
+
+set adjust-open 'width'
+
+set selection-clipboard clipboard
+
+set recolor true
+
+#set window-icon "/opt/zathura/local/share/icons/hicolor/64x64/apps/org.pwmt.zathura.png"
+# ---
+
+# SyncTeX -----
+#set synctex true
+#set synctex-editor-command "nvr --remote-silent %f -c %l"
+# ---
+
+# UI and Color Setting -----
+# default -----
+set default-bg "#2e3440" # nord0
+set default-fg "#d8dee9" # nord4
+#set default-bg "#fff1cb"
+#set default-fg "#ffa07a"
+# ---
+# status bar -----
+set statusbar-bg "#2e3440" # nord0
+set statusbar-fg "#d8dee9" # nord4
+
+#set statusbar-bg 'rgb(50, 47, 46)'
+# ---
+# input bar -----
+set inputbar-bg "#2e3440" # nord0
+set inputbar-fg "#a3be8c" # nord14
+# ---
+# completion -----
+#set completion-bg           "#2e3440" # nord0
+#set completion-fg           "#d8dee9" # nord4
+#set completion-group-bg     "#2e3440" # nord0
+#set completion-group-fg     "#d8dee9" # nord4
+#set completion-highlight-bg "#434c5e" # nord2
+#set completion-highlight-fg "#d8dee9" # nord4
+# ---
+# notification -----
+set notification-bg            "#3b4252"    # nord2
+set notification-fg            "#eceff4"    # nord6
+set notification-error-bg      "#bf616a"    # nord11
+set notification-error-fg      "#eceff4"    # nord6
+set notification-warning-bg    "#ebcb8b"    # nord13
+set notification-warning-fg    "#2e3440"    # nord0
+# ---
+# highlight -----
+#set highlight-color            "#88c0d0"    # nord8
+#set highlight-active-color     "#88c0d0"    # nord8
+
+# Decrease highlight prominence (e.g. after Vim forward search)
+#set highlight-transparency 0.25
+# ---
+# index -----
+set index-bg "#2e3440" # nord0
+set index-fg "#d8dee9" # nord4
+
+set index-active-bg "#434c5e" # nord2
+set index-active-fg "#d8dee9" # nord4
+# ---
+# recolor -----
+#set recolor-darkcolor          "#d8dee9"    # nord4
+#set recolor-lightcolor         "#2e3440"    # nord0
+
+# Light
+#set recolor-lightcolor        "#fbfbfc"    # markdown body background
+#set recolor-darkcolor         "#2e3440"    # nord0
+#set default-bg                "#fbfbfc"    # markdown body background
+
+# Dark
+#set recolor-lightcolor        "#2e3440"    # markdown body background
+#set recolor-darkcolor         "#fbfbfc"    # nord0
+#set default-bg                "#2e3440"    # markdown body background
+
+# background
+set recolor-lightcolor "#fff1cb"
+#set recolor-lightcolor "#e1dbc7"
+#set recolor-lightcolor "#cce6cc"
+
+# font
+set recolor-darkcolor "#6a5238"
+#set recolor-darkcolor "#000000"
+# ---
+# loading -----
+set render-loading-bg          "#2e3440"    # nord0
+set render-loading-fg          "#d8dee9"    # nord4
+# ---
+# ---
+
+# Key Map -----
+# map j navigate
+
+#map presentation j feedkeys <Space>
+#map presentation k feedkeys <S-Space>
+# ---
+
+# vim: set modeline fmr=-----,--- fdm=marker:
