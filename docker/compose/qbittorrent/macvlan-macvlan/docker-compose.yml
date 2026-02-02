@@ -1,0 +1,64 @@
+---
+networks:
+  qb-outer:
+    driver: macvlan
+    driver_opts:
+      parent: ${OUTER_INTERFACE}
+    ipam:
+      config:
+        - subnet: ${OUTER_SUBNET}
+          gateway: ${OUTER_GATEWAY}
+          ip_range: ${OUTER_IP_RANGE}
+
+  qb-inner:
+    driver: macvlan
+    driver_opts:
+      parent: ${INNER_INTERFACE}
+    ipam:
+      config:
+        - subnet: ${INNER_SUBNET}
+          gateway: ${INNER_GATEWAY}
+          ip_range: ${INNER_IP_RANGE}
+
+services:
+  qbittorrent:
+    #image: lscr.io/linuxserver/qbittorrent:latest
+    image: linuxserver/qbittorrent:5.1.2-r2-ls415
+
+    container_name: qbittorrent
+
+    privileged: true
+    user: root
+
+    # TODO
+    environment:
+      # user ID
+      - PUID=1000
+      # group ID
+      - PGID=1000
+      # time zone
+      - TZ=${QB_TZ}
+      # for changing the port of the web UI
+      - WEBUI_PORT=${QB_WEBUI_PORT}
+      # for changing the port of tcp/udp connection
+      - TORRENTING_PORT=${QB_TORRENTING_PORT}
+
+    # TODO
+    volumes:
+      # contains all relevant configuration files
+      #- /path/to/qbittorrent/appdata:/config
+      - ${QB_CONFIG_PATH}:/config
+      # location of downloads on disk (optional)
+      #- /path/to/downloads:/downloads
+      - ${QB_DOWNLOAD_PATH}:/downloads
+
+    restart: unless-stopped
+
+    networks:
+      qb-outer:
+        ipv4_address: ${OUTER_IP}
+
+      qb-inner:
+        ipv4_address: ${INNER_IP}
+
+# vim: set ft=yaml sw=2 ts=2 sts=2 et:
