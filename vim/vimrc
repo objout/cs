@@ -8,3 +8,4 @@ set sts=4
 set autoindent
 set nowrap
 "set expandtab
+set modeline
