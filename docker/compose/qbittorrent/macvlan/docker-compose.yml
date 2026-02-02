@@ -1,0 +1,46 @@
+---
+networks:
+  qb-macvlan:
+    driver: macvlan
+    driver_opts:
+      parent: ${INTERFACE}
+    ipam:
+      config:
+        - subnet: ${SUBNET}
+          gateway: ${GATEWAY}
+          ip_range: ${IP_RANGE}
+
+services:
+  qbittorrent:
+    #image: lscr.io/linuxserver/qbittorrent:latest
+    image: linuxserver/qbittorrent:5.1.2-r2-ls415
+
+    container_name: qbittorrent
+
+    # TODO
+    environment:
+      # user ID
+      - PUID=1000
+      # group ID
+      - PGID=1000
+      # time zone
+      - TZ=${QB_TZ}
+      # for changing the port of the web UI
+      - WEBUI_PORT=${QB_WEBUI_PORT}
+      # for changing the port of tcp/udp connection
+      - TORRENTING_PORT=${QB_TORRENTING_PORT}
+
+    # TODO
+    volumes:
+      # contains all relevant configuration files
+      #- /path/to/qbittorrent/appdata:/config
+      - ${QB_CONFIG_PATH}:/config
+      # location of downloads on disk (optional)
+      #- /path/to/downloads:/downloads
+      - ${QB_DOWNLOAD_PATH}:/downloads
+
+    restart: unless-stopped
+
+    networks:
+      qb-macvlan:
+        #ipv4_address: 192.168.250.217
