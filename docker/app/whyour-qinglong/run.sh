@@ -3,7 +3,7 @@
 docker pull whyour/qinglong:latest
 
 docker run -dit \
-  -v PWD/ql/data:/ql/data \
+  -v $PWD/ql/data:/ql/data \
   -p 5700:5700 \
   -e QL_PORT=5700 \
   --name qinglong \
@@ -16,7 +16,7 @@ docker exec -it qinglong bash
 
 # 配置 npm
 pnpm config set registry https://registry.npmmirror.com/
-pnpm install -g
+#pnpm install -g
 
 # 配置 pip
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
