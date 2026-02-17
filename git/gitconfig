@@ -1,0 +1,202 @@
+# ~/.gitconfig
+
+# color -------
+[color]
+	ui = true
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red
+	new = green
+#  -----
+
+# diff -------
+[diff]
+	tool = nvimdiff
+	# Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
+	# instead of a/b/c/d as prefixes for patches
+	mnemonicprefix = true
+	algorithm = patience
+[difftool]
+	prompt = false
+	trustExitCode = true
+#  -----
+
+# alias -------
+[alias]
+	# diff
+	dt = difftool
+	# diff unstaged changes
+	d = diff
+	# diff staged changes
+	dc = diff --cached
+	# diff last committed change
+	last = diff HEAD^
+
+	# add
+	a = add
+	# stage commits chunk by chunk
+	chunkyadd = add --patch
+
+	# via http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
+	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+	snapshots = !git stash list --grep snapshot
+
+	#via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
+	recent-branches = !git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)'
+
+	# branch
+	b = branch -v
+	br = branch
+	ba = branch -al
+
+	# commit
+	# commit with message
+	c = commit -m
+	# commit all with message
+	ca = commit -am
+	# commit
+	ci = commit
+	# ammend your last commit
+	amend = commit --amend
+
+	# checkout
+	co = checkout
+	# create and switch to a new branch (mnemonic: "git new branch branchname...")
+	nb = checkout -b
+
+	# switch
+	sw = switch
+
+	# cherry-pick
+	# grab a change from a branch
+	cp = cherry-pick -x
+
+	# remote
+	# show remotes (verbose)
+	r = remote -v
+
+	# pull
+	pl = pull
+
+	# push
+	ps = push
+
+	# stash
+	# stash changes
+	ss = stash
+	# list stashes
+	sl = stash list
+	# apply stash (restore changes)
+	sa = stash apply
+	# drop stashes (destory changes)
+	sd = stash drop
+
+	# status
+	s = status
+	st = status -sb
+	stat = status
+
+	# tag
+	# show tags with <n> lines of each tag message
+	t = tag -n
+
+	# log
+	l = log --graph --date=short
+	changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+	short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+	simple = log --pretty=format:\" * %s\"
+	shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+
+	# rebase
+	rb = rebase -i
+	# continue rebase
+	rc = rebase --continue
+	# skip rebase
+	rs = rebase --skip
+
+	# reset
+	# remove files from index (tracking)
+	unstage = reset HEAD --
+	# go back before last commit, with files in uncommitted state
+	uncommit = reset --soft HEAD^
+	# show changes to a file
+	filelog = log -u
+
+	# fire up the merge tool
+	mt = mergetool
+	mrg = merge --no-ff
+
+	# svn helpers
+	svnr = svn rebase
+	svnd = svn dcommit
+	svnl = svn log --oneline --show-commit
+
+	root = rev-parse --show-toplevel
+#  -----
+
+[core]
+	autocrlf = false
+	editor = vim
+	quotepath = false
+
+[init]
+	defaultBranch = main
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+[format]
+	pretty = format:%C(blue)%ad%Creset %C(yellow)%h%C(green)%d%Creset %C(blue)%s %C(magenta) [%an]%Creset
+
+# merge -------
+[merge]
+	summary = true
+	verbosity = 1
+	tool = nvimdiff
+[mergetool]
+	prompt = false
+[mergetool "mvimdiff"]
+	# use fugitive.vim for 3-way merge
+	cmd="mvim -c 'Gdiff' $MERGED"
+	keepbackup=true
+#  -----
+
+[push]
+	# 'git push' will push the current branch to its tracking branch
+	# the usual default is to push all branches
+	default = upstream
+
+[pull]
+	rebase = true
+
+[branch]
+	autosetupmerge = true
+
+[advice]
+	statusHints = false
+
+[apply]
+	whitespace = nowarn
+
+[rerere]
+	# Remember my merges
+	# http://gitfu.wordpress.com/2008/04/20/git-rerere-rereremember-what-you-did-last-time/
+	enabled = true
+
+[http]
+	postBuffer = 157286400
+
+# vim: set ft=gitconfig sw=4 ts=4 sts=4 noet cms=#\ %s:
+# vim: set fdm=marker fmr=\ -------,\ -----:
