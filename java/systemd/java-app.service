@@ -1,0 +1,43 @@
+[Unit]
+Description=Java Application
+Documentation=https://example.com/docs
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+
+# 环境变量
+Environment=JAVA_HOME=/usr/lib/jvm/java-11
+Environment=APP_HOME=/opt/batch-control
+
+ExecStart=/usr/bin/java \
+          -Xmx2g \
+          -Xms2g \
+          -XX:+UseG1GC \
+          -Dspring.profiles.active=prod \
+          -jar ${APP_HOME}/control-batch-0.0.1-SNAPSHOT.jar
+ExecStop=/bin/kill -15 $MAINPID
+WorkingDirectory=${APP_HOME}
+
+User=batchuser
+Group=batchgroup
+#NoNewPrivileges=yes
+
+# 自动恢复机制
+# 失败时自动重启
+Restart=on-failure
+# 重启间隔
+RestartSec=30
+# 时间窗口
+StartLimitInterval=300
+# 最大重启次数
+StartLimitBurst=3
+
+# 日志
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=java-app
+
+[Install]
+WantedBy=multi-user.target
