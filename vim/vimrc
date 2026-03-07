@@ -1,19 +1,62 @@
 set nocompatible
+set noerrorbells
 colo evening
 set relativenumber
-inoremap jk <esc>
-nnoremap <space> :
 set shiftwidth=4
 set ts=4
 set sts=4
 set autoindent
+set smartindent
 set nowrap
 "set expandtab
 set modeline
+
+filetype on
+filetype plugin on
+filetype indent on
+syntax enable
 syntax on
+
+set laststatus=2
+set cmdheight=2
+set t_Co=256
+set showcmd
+set ruler
+set cursorline
+set whichwrap+=<,>,h,l
+set virtualedit=block,onemore
+
+" window
+set splitbelow
+set splitright
+
+set nobackup
+set noswapfile
+set autoread
+"set autowrite
+set confirm
+
+" encoding
+set termencoding=utf-8
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,gbk,cp936,gb2312,gb18030
+
+" completion
+set wildmenu
+set completeopt-=preview
 
 augroup yaml
   autocmd!
-
-  autocmd BufNewFile *.yaml setl ft=yaml sw=2 ts=2 sts=2 et
+  autocmd BufNewFile *.yaml setl ft=yaml sw=2 ts=2 sts=2 et indk-=0#
 augroup END
+
+let mapleader = ","
+
+" key maps
+" insert
+inoremap jk <esc>
+inoremap <c-u> <esc>viwUea
+
+" normal
+nnoremap <space> :
+nnoremap <c-u> <esc>viwUe
