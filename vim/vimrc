@@ -1,3 +1,4 @@
+" Settings -----
 set nocompatible
 set noerrorbells
 colo evening
@@ -44,19 +45,360 @@ set fileencodings=utf-8,ucs-bom,gbk,cp936,gb2312,gb18030
 " completion
 set wildmenu
 set completeopt-=preview
+" ---
 
+" Key maps -----
+" Leader setting -----
+let g:mapleader = ','
+"let g:maplocalleader = ','
+" ---
+
+" Basis -----
+inoremap <silent> jk <Esc>
+inoremap <c-u> <esc>viwUea
+tnoremap <silent> jk <C-\><C-n>
+
+"nnoremap j gj
+"nnoremap k gk
+
+nnoremap <Space> :
+nnoremap <c-u> <esc>viwUe
+
+noremap <silent> s <Nop>
+noremap <silent> S <Nop>
+
+nnoremap <silent> <Leader><Cr> :noh<Cr>
+
+"nnoremap <silent> J 6jzz
+"nnoremap <silent> K 6kzz
+
+nnoremap <silent> H ^
+nnoremap <silent> L $
+vnoremap <silent> H ^
+vnoremap <silent> L g_
+
+nnoremap <silent> Q :q!<Cr>
+
+vnoremap <silent> Y "+y
+
+" Replace what you highlight
+vnoremap <silent> p "_dP
+
+" command history
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+" paste mode
+"set pastetoggle=<f2>
+
+" formatting paragraph
+nnoremap <Leader>fp gqap"
+vnoremap <Leader>fp gq
+
+" remove the Windows ^M
+nnoremap <Leader>rmw mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+" ---
+
+" Edit $MYVIMRC -----
+nnoremap <silent> <Leader>erc :e $MYVIMRC<Cr>
+nnoremap <silent> <Leader>src :so %<Cr>
+" ---
+
+" Sign Wrapper Shortcut -----
+vnoremap <silent> <Leader>" di""<Esc>P
+vnoremap <silent> <Leader>' di''<Esc>P
+vnoremap <silent> <Leader>` di``<Esc>P
+vnoremap <silent> <Leader>\| di\|  \|<Esc>hP
+
+vnoremap <silent> <Leader>{ di{}<Esc>P
+vnoremap <silent> <Leader>[ di[]<Esc>P
+vnoremap <silent> <Leader>( di()<Esc>P
+vnoremap <silent> <Leader>< di<><Esc>P
+" ---
+
+" Option Setting Shortcut -----
+nnoremap <silent> <Leader>sw :set wrap!<Cr>
+nnoremap <silent> <Leader>ro :setlocal readonly!<Cr>
+" ---
+
+" Indent -----
+nnoremap <silent> < <<
+nnoremap <silent> > >>
+
+vnoremap <silent> < <gv
+vnoremap <silent> > >gv
+" ---
+
+" Move line up and down -----
+"nnoremap <silent> mj ":move .+1<Cr>=="
+"nnoremap <silent> mk ":move .-2<Cr>=="
+nnoremap <silent> mj ":move .+1<Cr>"
+nnoremap <silent> mk ":move .-2<Cr>"
+vnoremap <silent> mj ":m '>+1<Cr>gv=gv"
+vnoremap <silent> mk ":m '<-2<Cr>gv=gv"
+" ---
+
+" Saving and restoring session -----
+set ssop=blank,buffers,curdir,globals,tabpages,folds,help,resize,winpos,winsize,terminal
+nnoremap <Leader>ms :mksession! my.vim<Cr> :wviminfo! my.viminfo<Cr>
+nnoremap <Leader>ss :source my.vim<Cr> :rviminfo my.viminfo<Cr>
+" ---
+
+" Tabs -----
+" Navigation -----
+nnoremap <silent> <Leader>ti :tabe<Cr>
+nnoremap <silent> <Leader>th :tabp<Cr>
+nnoremap <silent> <Leader>tl :tabn<Cr>
+nnoremap <silent> <Leader>tr :tabn #<Cr>
+nnoremap <silent> <Leader>tgf <C-W>gF
+nnoremap <silent> <Leader>ts :tab split<Cr>
+nnoremap <silent> <Leader>t0s :0tab split<Cr>
+nnoremap <silent> <Leader>t$s :$tab split<Cr>
+" ---
+" Move tab -----
+nnoremap <silent> <Leader>tmh :-tabmove<Cr>
+nnoremap <silent> <Leader>tml :+tabmove<Cr>
+nnoremap <silent> <Leader>tm0 :0tabmove<Cr>
+nnoremap <silent> <Leader>tm$ :$tabmove<Cr>
+nnoremap <silent> <Leader>tmr :tabmove #<Cr>
+" ---
+" Close tab -----
+nnoremap <silent> <Leader>tcc :tabc<Cr>
+nnoremap <silent> <Leader>tcr :tabc #<Cr>
+nnoremap <silent> <Leader>tch :-tabc<Cr>
+nnoremap <silent> <Leader>tcl :+tabc<Cr>
+nnoremap <silent> <Leader>tc0 :1tabc<Cr>
+nnoremap <silent> <Leader>tc$ :$tabc<Cr>
+nnoremap <silent> <Leader>to :tabo<Cr>
+" ---
+" ---
+
+" Windows -----
+" Split screen -----
+" win split left
+nnoremap <silent> <Leader>wsh :set nospr<Cr>:vsp<Cr>:set spr<Cr>
+" win split down
+nnoremap <silent> <Leader>wsj :set sb<Cr>:sp<Cr>
+" win split up
+nnoremap <silent> <Leader>wsk :set nosb<Cr>:sp<Cr>:set sb<Cr>
+" win split right
+nnoremap <silent> <Leader>wsl :set spr<Cr>:vsp<Cr>
+" ---
+" Navigation -----
+" left win
+nnoremap <silent> <Leader>h <C-w>h
+" down win
+nnoremap <silent> <Leader>j <C-w>j
+" up win
+nnoremap <silent> <Leader>k <C-w>k
+" right win
+nnoremap <silent> <Leader>l <C-w>l
+
+" win only
+nnoremap <silent> <Leader>wo <C-w>o
+" win close
+nnoremap <silent> <Leader>wc :close<Cr>
+
+"tnoremap <silent> <Leader>h <C-\><C-n><C-w>h
+"tnoremap <silent> <Leader>j <C-\><C-n><C-w>j
+"tnoremap <silent> <Leader>k <C-\><C-n><C-w>k
+"tnoremap <silent> <Leader>l <C-\><C-n><C-w>l
+" ---
+" Adjust layout -----
+" horizontal layout
+nnoremap <silent> <Leader>wh <C-W>b<C-W>K
+" vertical layout
+nnoremap <silent> <Leader>wv <C-W>b<C-W>H
+" change win size -----
+nnoremap <silent> <Up>   :resize +5<Cr>
+nnoremap <silent> <Down> :res -5<Cr>
+nnoremap <silent> <Left> :vert res +5<Cr>
+nnoremap <silent> <Right> :vert res -5<Cr>
+" ---
+" ---
+" Use <leader>wq to intelligently close a window
+" (if there are multiple windows into the same buffer)
+" or kill the buffer entirely if it's the last window looking into that buffer
+function! CloseWindowOrKillBuffer()
+  let number_of_windows_to_this_buffer = len(filter(range(1, winnr('$')), "winbufnr(v:val) == bufnr('%')"))
+
+  " We should never bdelete a nerd tree
+  if matchstr(expand("%"), 'NERD') == 'NERD'
+    wincmd c
+    return
+  endif
+
+  if number_of_windows_to_this_buffer > 1
+    wincmd c
+  else
+    bdelete
+  endif
+endfunction
+
+nnoremap <silent> <leader>wq :call CloseWindowOrKillBuffer()<CR>
+" ---
+
+" Buffers -----
+nnoremap <silent> <Leader>bd :bd %<Cr>
+nnoremap <silent> <Leader>bh :bp<Cr>
+nnoremap <silent> <Leader>bl :bn<Cr>
+" ---
+
+" Quick fix and location list -----
+" Quick Fix -----
+nnoremap <silent> <Leader>Qo :copen<Cr>
+nnoremap <silent> <Leader>Qc :cclose<Cr>
+nnoremap <silent> <Leader>Qj :cnext<Cr>
+nnoremap <silent> <Leader>Qk :cprev<Cr>
+" ---
+" Location List -----
+nnoremap <silent> <Leader>Lo :lopen<Cr>
+nnoremap <silent> <Leader>Lc :lclose<Cr>
+nnoremap <silent> <Leader>Lj :lnext<Cr>
+nnoremap <silent> <Leader>Lk :lprev<Cr>
+" ---
+" ---
+
+" Scratch buffer -----
+function RefreshBuf()
+  set noconfirm
+  bufdo e !
+  set confirm
+endfunction
+
+nnoremap <Leader>rb :call RefreshBuf()<Cr>
+" ---
+
+" File Explorer (netrw) -----
+nnoremap <silent> <Leader>ft <Cmd>Lexplore<Cr>
+let g:netrw_banner    = 0
+let g:netrw_hide      = 1
+let g:netrw_liststyle = 3
+let g:netrw_winsize   = 30
+
+" preview window shown in a vertically split window
+let g:netrw_preview      = 1
+" controls how <cr> will open the file
+" 0: re-using the same window  (default)
+" 1: horizontally splitting the window first
+" 2: vertically   splitting the window first
+" 3: open file in new tab
+" 4: act like "P" (ie. open previous window)
+let g:netrw_browse_split = 2
+let g:netrw_altv         = 1 " split right
+let g:netrw_alto         = 0 " split above
+
+let g:netrw_home = '$HOME/.local/state/vim'
+" ---
+
+" Mode line setting -----
+function! _set_modeline()
+  let filetype = input("Please enter file type: ", expand('<cword>'))
+  exe "normal i# vim: ai:et:ts=2:sw=2:sts=2:tw=80:ft=" . filetype
+endfunction
+
+" set modeline
+nmap _m :call _set_modeline()<cr>
+" ---
+
+" Open changed files -----
+function! OpenChangedFiles()
+  " Close all windows, unless they're modified
+  "only
+  let status = system('git status -s | grep "^ \?\(M\|A\)" | cut -d " " -f 3')
+  let filenames = split(status, "\n")
+  if len(filenames) > 0
+    exec "edit " . filenames[0]
+    for filename in filenames[1:]
+      exec "tabnew " . filename
+    endfor
+  end
+endfunction
+command! OpenChangedFiles :call OpenChangedFiles()
+
+nnoremap <leader>ocf :OpenChangedFiles<CR>
+" ---
+
+" Open a Quickfix window for the last search.
+" Quickfix Search
+nnoremap <silent> <leader>qs :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+" ---
+
+" Auto commands -----
+" Last place -----
+autocmd BufReadPost * {
+  if line("'\"") > 0 && line("'\"") <= line("$") |
+    exe "normal g`\"" |
+  endif
+}
+" ---
+
+" Disable automatic comment on newline -----
+augroup REMOVE_COMMENT
+  autocmd!
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+augroup END
+" ---
+
+" Status line -----
+autocmd BufEnter * {
+  set laststatus=2
+  legacy let &statusline='%f%m%r %=L:%l/%L %c %p%% '..&ff..' '..&encoding..'|%y'
+}
+" ---
+
+" Strip blank -----
+augroup STRIP_BLANK
+  autocmd BufWritePre * {
+    :%s/\s\+$//e
+    :%s/\n\+\%$//e
+  }
+augroup END
+" ---
+
+autocmd BufWinEnter * highlight ColorColumn ctermbg=red
+
+" Put quickfix window always to the bottom -----
+augroup quickfix
+    autocmd!
+    autocmd FileType qf wincmd J
+    autocmd FileType qf setlocal wrap
+augroup END
+" ---
+
+" YAML -----
 augroup yaml
   autocmd!
   autocmd BufNewFile *.yaml setl ft=yaml sw=2 ts=2 sts=2 et indk-=0#
 augroup END
+" ---
 
-let mapleader = ","
+" Copy text to clipboard -----
+function! s:write_clipboard(str)
+  if has('nvim')
+    call chansend(v:stderr, a:str)
+  else
+    if filewritable('/dev/fd/2')
+      call writefile([a:str], '/dev/fd/2', 'b')
+    else
+      exec("silent! !echo ". shellescape(a:str))
+      redraw!
+    endif
+  endif
+endfunction
 
-" key maps
-" insert
-inoremap jk <esc>
-inoremap <c-u> <esc>viwUea
+function! Clip_copy()
+  " encoding
+  if v:event.regname != 'e'
+    return
+  endif
 
-" normal
-nnoremap <space> :
-nnoremap <c-u> <esc>viwUe
+  let content = join(v:event.regcontents, "\n")
+  let content_b64 = system("base64", content)
+  let cmd_str = "\e]52;c;" .trim(content_b64) . "\x07"
+
+  call s:write_clipboard(cmd_str)
+endfunction
+autocmd TextYankPost * call Clip_copy()
+" ---
+" ---
