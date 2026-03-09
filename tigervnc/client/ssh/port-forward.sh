@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Local port forwarding for VNC server
+
+# TODO
+SSH_SERVER_USER=root
+SSH_SERVER_IP=192.168.90.85
+SSH_SERVER_PORT=8022
+
+# TODO
+VNC_SERVER_PORT=5901
+LOCAL_PORT=5908
+
+ssh -p ${SSH_SERVER_PORT} -L ${LOCAL_PORT}:localhost:${VNC_SERVER_PORT} \
+  ${SSH_SERVER_USER}@${SSH_SERVER_IP}
