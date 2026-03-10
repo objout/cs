@@ -1,0 +1,7 @@
+docker.1ms.run/library/hello-world:latest
+
+hub.1panel.dev/library/hello-world:latest
+
+swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/library/hello-world:latest
+
+m.daocloud.io/docker.io/library/hello-world:latest
