@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# tmpfs
+#export TL_HOME=/run/user/$(id -u)/texlive
+export TL_HOME=/dev/shm/texlive
+if [ ! -d "$TL_HOME" ] ; then
+  mkdir -p $TL_HOME/{var,tmp,out}
+fi
+export TEXMFVAR=$TL_HOME/var
+# 临时目录
+export TMP=$TL_HOME/tmp
+export TEMP=$TL_HOME/tmp
+# LaTeX 编译输出目录
+export TL_BUILD_DIR=$TL_HOME/out
