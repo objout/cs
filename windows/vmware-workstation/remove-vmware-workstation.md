@@ -151,3 +151,33 @@ reg query "HKLM\SYSTEM\CurrentControlSet\Services" /f "vm" /s
 ```
 shutdown /r /t 5
 ```
+
+## 卸载 vmware workstation 时 virtual network editor 无响应如何做
+
+```
+# 管理员运行
+# vmware-workstation-full.exe 是 vmware workstation 的安装包
+vmware-workstation-full.exe -r
+```
+
+任意卸载电脑中的一张网卡属性中的"VMware Bridge Protocol"协议。
+
+卸载 vmware
+
+重装 vmware
+
+## 重新注册 vmware authd 的服务
+
+要确保以下操作在 `services.msc` 这个面板关闭的情况下进行:
+
+```
+# 1. 管理员运行 cmd
+
+# 2. 删除服务
+sc delete VMAuthdService
+
+# 3. 重新创建服务, 更换路径位置
+sc create VMAuthdService binpath= "D:\VMware14.0\vmware-authd.exe"
+
+# 4. 打开 services.msc 启动vmware authd服务
+```
