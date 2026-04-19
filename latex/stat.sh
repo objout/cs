@@ -1,6 +1,7 @@
 #!/bin/bash
 
-TEX_FILES=contents/chapters/*.tex
+#TEX_FILES=contents/chapters/*.tex
+TEX_FILES=contents/sections/*.tex
 fig_cnt=$(grep -n '\s*begin{figure' $TEX_FILES | wc -l)
 tab_cnt=$(grep -n '\s*begin{\(long\)*table' $TEX_FILES | wc -l)
 

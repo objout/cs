@@ -4,14 +4,15 @@ function! GenTab() range
   " 设置每行不限字数，防止替换后格式错乱
   :set tw=0
 
+  " 删除空行
+  execute "'<,'>g/^$/d"
+
   " 替换制表符
   execute "'<,'>s/\\t/ \\& /ge"
 
   " 添加表格换行
   execute "'<,'>norm A \\\\"
 
-  " 删除空行
-  execute "'<,'>g/^$/d"
 endfunction
 
 command! -range DoTab call GenTab()
