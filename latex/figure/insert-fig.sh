@@ -30,11 +30,17 @@ do_sub() {
   fi
 
   awk -v base=$BASE '
+  BEGIN {
+    FS = "@"
+  }
+
   /% todo figure/ {
       count++
+      # Remove leading and trailing spaces
+      gsub(/^ +| +$/, "", $2);
       printf "\\begin{figure}[H]\n"
       printf "\\centering\\includegraphics[width=0.80\\textwidth]{image%s.png}\n", base + count - 1
-      printf "\\caption{}\\label{fig:%s}\n", base + count - 1
+      printf "\\caption{%s}\\label{fig:%s}\n", $2, base + count - 1
       printf "\\end{figure}\n"
       next
   }
