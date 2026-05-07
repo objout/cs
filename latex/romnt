@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -eE
+
+show_usage() {
+  echo "$0 <partition> <mount point>"
+  echo "e.g. $0 /dev/sdc1 /mnt/"
+}
+
+if [ -z "$1" ] || [ -z "$2" ] ; then
+  show_usage
+  exit 1
+fi
+
+PART=$1
+MNT_POINT=$2
+
+if [ ! -b "$PART" ] ; then
+  echo "The partition argument $PART is not a block device!"
+  show_usage
+  exit 1
+fi
+
+if [ ! -d "$MNT_POINT" ] ; then
+  echo "The mount point argument $MNT_POINT is not existed!"
+  show_usage
+  exit 1
+fi
+
+BLOCK_DEV=$(echo $PART | sed -e 's/[0-9]\+//g')
+
+sudo blockdev --setro $BLOCK_DEV
+sudo mount -o ro,noload,noatime,nodiratime $PART $MNT_POINT
