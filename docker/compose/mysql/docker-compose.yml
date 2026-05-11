@@ -1,0 +1,27 @@
+services:
+  mysql:
+    image: mysql:8.0 
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai 
+      - LANG=en_US.UTF-8
+      - MYSQL_ROOT_HOST='%'
+      - MYSQL_ROOT_PASSWORD=123456
+      #- MYSQL_USER=123456
+      #- MYSQL_PASSWORD=123456
+      #- MYSQL_DATABASE=exampledb
+    ports:
+      - 3306:3306
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "10m"
+            max-file: "3"
+    volumes:
+        - ./mysql-data/data:/var/lib/mysql
+        - ./mysql-data/logs:/var/log/mysql
+        - ./my.cnf:/etc/my.cnf
+        # 利用字典序控制 sql 文件执行顺序, 先 schema 后 data
+        - ./01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+        - ./02_data.sql:/docker-entrypoint-initdb.d/02_data.sql
