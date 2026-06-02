@@ -1,6 +1,8 @@
 " 使用 $ 包裹 visual mode 选中的内容
 xnoremap <leader>m c$<C-r>"$<Esc>
 
+xnoremap <leader>t c\text{<C-r>"}<Esc>
+
 function! RemoveSurroundingDollar() range
     " 保存当前无名寄存器的内容
     let save_reg = getreg('"')
