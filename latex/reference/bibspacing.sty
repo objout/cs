@@ -1,0 +1,11 @@
+\newlength{\bibitemsep}{\setlength{\bibitemsep}{.01\baselineskip plus .005\baselineskip minus .005\baselineskip}}
+
+\newlength{\bibparskip}{\setlength{\bibparskip}{0pt}}
+
+\let\oldthebibliography\thebibliography
+
+\renewcommand\thebibliography[1]{%
+  \oldthebibliography{#1}%
+  \setlength{\parskip}{\bibitemsep}%
+  \setlength{\itemsep}{\bibparskip}%
+}
