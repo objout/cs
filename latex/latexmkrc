@@ -11,9 +11,20 @@ $clean_ext = "synctex.gz acn acr alg aux bbl bcf blg brf fdb_latexmk glsdefs glg
 #$pdflatex = "pdflatex -file-line-error -halt-on-error -synctex=0 -interaction=batchmode %O %S";
 #$clean_ext = "synctex.gz acn acr alg aux bbl bcf blg brf fdb_latexmk glsdefs glg glo gls idx ilg ind ist lof log lot out run.xml toc";
 
+# when using bibtex, uncomment to make `latexmk -C` clean bbl file
+#$bibtex_use = 2;
+
 $preview_mode = 0;
 $pdf_update_method = 0;
 
-my $tl_build_dir = $ENV{'TL_BUILD_DIR'} // '.';
+# determine output directory
+#my $tl_build_dir = $ENV{'TL_BUILD_DIR'} // '.';
+
+unless (exists $ENV{'TL_BUILD_DIR'} && $ENV{'TL_BUILD_DIR'} ne '') {
+  $ENV{'TL_BUILD_DIR'} = $ENV{'PWD'};
+}
+my $tl_build_dir = $ENV{'TL_BUILD_DIR'};
+
+# set output directory
 $out_dir = "$tl_build_dir";
 $aux_dir = "$tl_build_dir";
