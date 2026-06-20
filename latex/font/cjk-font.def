@@ -1,0 +1,31 @@
+\ProvidesFile{cjk-font.def}[2026/05/01 v1.0.0 fonts definition]
+
+\setCJKsansfont[
+  BoldFont={SourceHanSansCN-Bold},
+  Path="fonts/",
+  Extension=".ttf"
+]{simhei}
+
+\setCJKfamilyfont{song}[
+  BoldFont={SourceHanSerifCN-SemiBold},
+  Path="fonts/",
+  Extension=".ttf"
+]{simsun}
+
+\setCJKfamilyfont{hei}[
+  BoldFont={SourceHanSansCN-Medium},
+  Path="fonts/",
+  Extension=".ttf"
+]{simhei}
+
+\setCJKfamilyfont{shei}[
+  BoldFont={SourceHanSansCN-Bold},
+  Path="fonts/",
+  Extension=".ttf"
+]{simhei}
+
+\NewDocumentCommand{\songti}   {} { \CJKfamily{song}  }
+\NewDocumentCommand{\heiti}    {} { \CJKfamily{hei}   }
+\NewDocumentCommand{\shei}    {} { \CJKfamily{shei}   }
+
+\endinput
