@@ -1,0 +1,7 @@
+TeXStudio
+
+https://mirrors.tuna.tsinghua.edu.cn/github-release/texstudio-org/texstudio/LatestRelease/
+
+TeXLive
+
+https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/
